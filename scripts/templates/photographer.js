@@ -1,17 +1,30 @@
 function photographerTemplate(data) {
-    const { name, portrait } = data;
+    const { name, id, city, country, tagline, price, portrait } = data;
 
-    const picture = `assets/photographers/${portrait}`;
+    const picture = `./assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
+        const a = document.createElement('a');
+        a.href = `photographer.html?id=${id}`;
+        a.setAttribute('aria-label', `View details of ${name}`); // Do i need to set the attribute for everyone?
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
+        const h3 = document.createElement( 'h3' );
+        h3.textContent = `${city}, ${country}`;
+        const div = document.createElement( 'div' );
+        div.textContent = tagline;
+        const p = document.createElement( 'p' );
+        p.textContent = `${price}€/jour`;
+        a.appendChild(img);
+        a.appendChild(h2);
+        a.appendChild(h3);
+        a.appendChild(div);
+        a.appendChild(p);
+        article.appendChild(a);
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+    return { getUserCardDOM }
 }
