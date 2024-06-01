@@ -113,3 +113,11 @@ form input {
     object-fit: fill;
 
 }
+
+button {
+    background-color: #901C1C;
+    text-align: center;
+    color: #FAFAFA;
+    width: 170px;
+    height: 69px;
+}

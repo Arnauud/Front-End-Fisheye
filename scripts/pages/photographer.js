@@ -27,7 +27,8 @@ async function displayPhotographer() {
                 <h1>${photographer.name}</h1>
                 <h3>${photographer.city}, ${photographer.country}</h3>
                 <div>${photographer.tagline}</div>
-                <img src="./assets/photographers/${photographer.portrait}" alt="${photographer.name}">
+                <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+                <img src="./assets/photographers/Sample_Photos/Photographers_ID_Photos/${photographer.portrait}" alt="${photographer.name}">
             `;
         } else {
             console.error('Photographer not found');
