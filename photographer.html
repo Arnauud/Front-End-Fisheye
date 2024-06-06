@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -10,24 +10,35 @@
   <body>
     <header>
       <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" />
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page">
       </a>
     </header>
     <main id="main">
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <div class="likesPrice">
+        <!-- import a heart -->
+        <div class="likes"></div>
+        <div class="price"></div>
+      </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h2 id="photographerName">Contactez-Moi</h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="">
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="firstname">Prénom</label>
+						<input type="text" name="firstname" id="firstname">
+            <label for="lastName">Nom</label>
+						<input type="email" name="lastName" id="lastName">
+            <label for="Email">E-mail</label>
+						<input type="Email" name="Email" id="email">
+            <label for="message">Votre message</label>
+            <textarea name="message" id="message" style="width: 534px; height: 210px"></textarea>
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>
