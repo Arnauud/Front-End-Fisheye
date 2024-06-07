@@ -121,3 +121,47 @@ button {
     width: 170px;
     height: 69px;
 }
+
+
+.likesPrice {
+    display: flex;
+    width: 256px;
+    align-items: center;
+    gap: 20px; /* Adjust gap as needed for space between elements */
+    background-color: #DB8876;
+    ;
+}
+
+.likesPrice span {
+    display: inline-block;
+    padding: 10px; /* Adjust padding as needed */
+}
+
+
+/* Style the dropdown container */
+.dropdownMenu {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the label */
+.dropdownMenu label {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* Style the select element */
+.dropdownMenu select {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #901C1C; /* Background color for the dropdown */
+    color: white; /* Text color for the dropdown */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 10px);
+    background-position-y: 50%;
+    padding-right: 10px; /* Space for custom arrow */
+}
+

@@ -10,7 +10,7 @@ function photographerTemplate(data) {
         a.setAttribute('aria-label', `View details of ${name}`); 
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
-        img.setAttribute('alt', ''); // pourquoi faire ca ? et est-ce suffisant?
+        img.setAttribute('alt', ''); 
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         
@@ -34,3 +34,5 @@ function photographerTemplate(data) {
     }
     return { getUserCardDOM }
 }
+
+

@@ -17,11 +17,15 @@
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
-      <div class="likesPrice">
-        <!-- import a heart -->
-        <div class="likes"></div>
-        <div class="price"></div>
-      </div>
+      <div class="dropdownMenu">
+        <label for="photographer-select">Trier par</label>
+        <select id="photographer-select">
+            <option value="1">Popularité</option>
+            <option value="2">Date</option>
+            <option value="3">Titre</option>
+        </select>
+    </div>
+      <div class="likesPrice"></div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
