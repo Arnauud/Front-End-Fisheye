@@ -43,12 +43,18 @@ async function displayPhotographer() {
         const photographer = await getPhotographerData(photographerId);
         const mediaData = await fetchMediaData(photographerId);
         const mediaLikes = mediaData.reduce((sum,item) => sum + item.likes, 0);
+                // Sort mediaData based on sortBy parameter
+
 
         if (photographer) {
             const header = document.querySelector('.photograph-header');
 
             // Clear any existing content
             header.innerHTML = '';
+
+            // Create a div for the left section
+            const leftSection = document.createElement('div');
+            leftSection.className = 'left-section';
 
             // Create h1 for photographer's name
             const h1 = document.createElement('h1');
@@ -62,6 +68,15 @@ async function displayPhotographer() {
             const divTagline = document.createElement('div');
             divTagline.textContent = photographer.tagline;
 
+            // Create a div for the center section (for the button)
+            const centerSection = document.createElement('div');
+            centerSection.className = 'center-section';
+
+            // Append elements to left section
+            leftSection.appendChild(h1);
+            leftSection.appendChild(h3);
+            leftSection.appendChild(divTagline);
+
             // Create button for contact
             const button = document.createElement('button');
             button.className = 'contact_button';
@@ -70,16 +85,17 @@ async function displayPhotographer() {
                 displayModal();
             };
 
+            // Append button to center section
+            centerSection.appendChild(button);
+
             // Create img for photographer's portrait
             const img = document.createElement('img');
             img.src = `./assets/photographers/Sample_Photos/Photographers_ID_Photos/${photographer.portrait}`;
             img.alt = photographer.name;
 
             // Append elements to header
-            header.appendChild(h1);
-            header.appendChild(h3);
-            header.appendChild(divTagline);
-            header.appendChild(button);
+            header.appendChild(leftSection);
+            header.appendChild(centerSection);
             header.appendChild(img);
 
 
@@ -98,50 +114,93 @@ async function displayPhotographer() {
             likesPriceBox.appendChild(spanLikes);
             likesPriceBox.appendChild(spanPrice);
 
-            //////// GETTING PHOTOGRAPHER PORTFOLIO ////////
-            function photographerPortfolio(data) {
-                const { id, photographerid, title, image, likes, date, price } = data;
-
-                const picture = `./assets/photographers/Sample_Photos/Photographers_ID_Photos/${portrait}`;
-                
-                function getPhotographerCardDOM() {
-//SAMPLE CODE FROM INDEX.JS
-
-                    // const article = document.createElement( 'article' );
-                    // const a = document.createElement('a');
-                    // a.href = `photographer.html?id=${id}`;
-                    // a.setAttribute('aria-label', `View details of ${name}`); 
-                    // const img = document.createElement( 'img' );
-                    // img.setAttribute("src", picture)
-                    // img.setAttribute('alt', ''); 
-                    // const h2 = document.createElement( 'h2' );
-                    // h2.textContent = name;
-                    
-                    // a.appendChild(img);
-                    // a.appendChild(h2);
-
-                    // article.appendChild(a);
-
-                    // const h3 = document.createElement( 'h3' );
-                    // h3.textContent = `${city}, ${country}`;
-                    // const div = document.createElement( 'div' );
-                    // div.textContent = tagline;
-                    // const p = document.createElement( 'p' );
-                    // p.textContent = `${price}€/jour`;
-
-                    // article.appendChild(h3);
-                    // article.appendChild(div);
-                    // article.appendChild(p);
-
-                    // return (article);
-                }
-                return { getPhotographerCardDOM }
-            }
 
 
+/////// GETTING PHOTOGRAPHER PORTFOLIO ///////
+const portfolio = document.querySelector('.portfolio');
+
+// Clear any existing content
+portfolio.innerHTML = '';
+
+// Iterate over each media item
+mediaData.forEach(media => {
+    // Create an article element for each media item
+    const article = document.createElement('article');
+
+    // Check if media.image is defined and is a string
+    if (media.image && typeof media.image === 'string') {
+        // Check if the image is a JPEG file
+        const isJPEG = media.image.toLowerCase().endsWith('.jpg') || media.image.toLowerCase().endsWith('.jpeg');
+
+        if (isJPEG) {
+            // Create an image element
+            const image = document.createElement('img');
+            // Set the source of the image
+            image.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.image}`;
+            // Append the image to the article
+            article.appendChild(image);
         }
     }
-}
+
+    // Check if media.video is defined and is a string
+    if (media.video && typeof media.video === 'string') {
+        // Check if the video is an MP4 file
+        const isMP4 = media.video.toLowerCase().endsWith('.mp4');
+
+        if (isMP4) {
+            // Create a container div for the video
+            const videoContainer = document.createElement('div');
+            
+            // Create a video element
+            const video = document.createElement('video');
+            // Set video attributes
+            video.controls = true;
+            video.loop = true;
+            video.muted = true;
+
+            // Set the video source
+            const source = document.createElement('source');
+            source.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
+            source.type = 'video/mp4';
+            // Append the source to the video element
+            video.appendChild(source);
+
+            // Append the video element to the container
+            videoContainer.appendChild(video);
+            // Append the container to the article
+            article.appendChild(videoContainer);
+        }
+    }
+
+    // Create a div for title and likes
+    const divTitleLikes = document.createElement('div');
+    divTitleLikes.className = 'divTitleLikes';
+
+    // Create a span for the title
+    const titleImg = document.createElement('span');
+    titleImg.textContent = media.title;
+
+    // Create a span for the likes
+    const imgLikes = document.createElement('span');
+    imgLikes.textContent = `${media.likes} \u2665`;
+
+    // Append title and likes to the div
+    divTitleLikes.appendChild(titleImg);
+    divTitleLikes.appendChild(imgLikes);
+
+    // Append the div to the article
+    article.appendChild(divTitleLikes);
+
+    // Append the article to the portfolio
+    portfolio.appendChild(article);
+});
+            }
+        }
+    }
 
 displayPhotographer();
+
+
+
+
 

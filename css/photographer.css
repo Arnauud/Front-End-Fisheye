@@ -2,16 +2,6 @@
     display: none;
 }
 
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    flex-grow: 1;
-}
-
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -79,6 +69,21 @@ form input {
     border-radius: 5px;
 }
 
+.photograph-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #FAFAFA;
+    height: 300px;
+    margin: 0 100px;
+}
+
+.photograph-header .left-section {
+    display: flex;
+    flex-direction: column;
+}
+
 .photograph-header h1 {
     color: #D3573C;
     padding-top: 12%;
@@ -91,24 +96,27 @@ form input {
     color: #D3573C;
     font-size: 24px;    
     margin: 0;
-    display:flex;
-
 }
 
 .photograph-header div {
     color: #525252;
-    padding-top: 3%;
     font-size: 18px;    
     margin: 0;
-
-    
+    padding-top: 3%;
 }
+
+.photograph-header .center-section {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
 
 .photograph-header img {
     display:flex;
     margin-right: 10px;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     object-fit: fill;
 
@@ -129,7 +137,10 @@ button {
     align-items: center;
     gap: 20px; /* Adjust gap as needed for space between elements */
     background-color: #DB8876;
-    ;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 5px;
 }
 
 .likesPrice span {
@@ -140,7 +151,7 @@ button {
 
 /* Style the dropdown container */
 .dropdownMenu {
-    margin: 20px;
+    margin: 20px 100px 100px;
     font-family: Arial, sans-serif;
 }
 
@@ -165,3 +176,34 @@ button {
     padding-right: 10px; /* Space for custom arrow */
 }
 
+.portfolio{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    color: #901C1C;
+    margin: 0 75px;
+}
+
+.portfolio article{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.portfolio img {
+    display: flex;
+    width: 350px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.portfolio .divTitleLikes {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;  /* Ensure the div spans the full width of its container */
+}
+
+video {
+    height: 300px;
+    width: 350px;
+}
