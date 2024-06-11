@@ -38,13 +38,13 @@ async function fetchMediaData(photographerId) {
 async function displayPhotographer() {
     const urlParams = new URLSearchParams(window.location.search);
     const photographerId = urlParams.get('id');
-    
+
     if (photographerId) {
         const photographer = await getPhotographerData(photographerId);
-        const mediaData = await fetchMediaData(photographerId);
-        const mediaLikes = mediaData.reduce((sum,item) => sum + item.likes, 0);
-                // Sort mediaData based on sortBy parameter
+        let mediaData = await fetchMediaData(photographerId);
+        if (!mediaData) return;
 
+        const mediaLikes = mediaData.reduce((sum, item) => sum + item.likes, 0);
 
         if (photographer) {
             const header = document.querySelector('.photograph-header');
@@ -81,6 +81,7 @@ async function displayPhotographer() {
             const button = document.createElement('button');
             button.className = 'contact_button';
             button.textContent = 'Contactez-moi';
+            button.setAttribute('aria-label', `Contact me ${photographer.name}`); 
             button.onclick = function() {
                 displayModal();
             };
@@ -92,115 +93,102 @@ async function displayPhotographer() {
             const img = document.createElement('img');
             img.src = `./assets/photographers/Sample_Photos/Photographers_ID_Photos/${photographer.portrait}`;
             img.alt = photographer.name;
+            
 
             // Append elements to header
             header.appendChild(leftSection);
             header.appendChild(centerSection);
             header.appendChild(img);
 
-
             const likesPriceBox = document.querySelector('.likesPrice');
 
-            // create span for photographer's likes
+            // Create span for photographer's likes
             const spanLikes = document.createElement('span');
             spanLikes.textContent = `Likes : ${mediaLikes} \u2665`;
 
-            // create span for photographer's price
+            // Create span for photographer's price
             const spanPrice = document.createElement('span');
-            spanPrice.textContent = `${photographer.price}€ / jour`
+            spanPrice.textContent = `${photographer.price}€ / jour`;
 
-
-            // Append span to priceFooter
+            // Append span to likesPriceBox
             likesPriceBox.appendChild(spanLikes);
             likesPriceBox.appendChild(spanPrice);
 
+            // Function to display the portfolio
+            function displayPortfolio(mediaData) {
+                const portfolio = document.querySelector('.portfolio');
+                portfolio.innerHTML = '';
 
+                mediaData.forEach(media => {
+                    const article = document.createElement('article');
 
-/////// GETTING PHOTOGRAPHER PORTFOLIO ///////
-const portfolio = document.querySelector('.portfolio');
+                    if (media.image && typeof media.image === 'string') {
+                        const isJPEG = media.image.toLowerCase().endsWith('.jpg') || media.image.toLowerCase().endsWith('.jpeg');
+                        if (isJPEG) {
+                            const image = document.createElement('img');
+                            image.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.image}`;
+                            article.appendChild(image);
+                        }
+                    }
 
-// Clear any existing content
-portfolio.innerHTML = '';
+                    if (media.video && typeof media.video === 'string') {
+                        const isMP4 = media.video.toLowerCase().endsWith('.mp4');
+                        if (isMP4) {
+                            const videoContainer = document.createElement('div');
+                            const video = document.createElement('video');
+                            video.controls = true;
+                            video.loop = true;
+                            video.muted = true;
 
-// Iterate over each media item
-mediaData.forEach(media => {
-    // Create an article element for each media item
-    const article = document.createElement('article');
+                            const source = document.createElement('source');
+                            source.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
+                            source.type = 'video/mp4';
+                            video.appendChild(source);
+                            videoContainer.appendChild(video);
+                            article.appendChild(videoContainer);
+                        }
+                    }
 
-    // Check if media.image is defined and is a string
-    if (media.image && typeof media.image === 'string') {
-        // Check if the image is a JPEG file
-        const isJPEG = media.image.toLowerCase().endsWith('.jpg') || media.image.toLowerCase().endsWith('.jpeg');
+                    const titleLikes = document.createElement('div');
+                    titleLikes.className = 'titleLikes';
 
-        if (isJPEG) {
-            // Create an image element
-            const image = document.createElement('img');
-            // Set the source of the image
-            image.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.image}`;
-            // Append the image to the article
-            article.appendChild(image);
-        }
-    }
+                    const titleImg = document.createElement('span');
+                    titleImg.textContent = media.title;
 
-    // Check if media.video is defined and is a string
-    if (media.video && typeof media.video === 'string') {
-        // Check if the video is an MP4 file
-        const isMP4 = media.video.toLowerCase().endsWith('.mp4');
+                    const imgLikes = document.createElement('span');
+                    imgLikes.textContent = `${media.likes} \u2665`;
 
-        if (isMP4) {
-            // Create a container div for the video
-            const videoContainer = document.createElement('div');
-            
-            // Create a video element
-            const video = document.createElement('video');
-            // Set video attributes
-            video.controls = true;
-            video.loop = true;
-            video.muted = true;
-
-            // Set the video source
-            const source = document.createElement('source');
-            source.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
-            source.type = 'video/mp4';
-            // Append the source to the video element
-            video.appendChild(source);
-
-            // Append the video element to the container
-            videoContainer.appendChild(video);
-            // Append the container to the article
-            article.appendChild(videoContainer);
-        }
-    }
-
-    // Create a div for title and likes
-    const divTitleLikes = document.createElement('div');
-    divTitleLikes.className = 'divTitleLikes';
-
-    // Create a span for the title
-    const titleImg = document.createElement('span');
-    titleImg.textContent = media.title;
-
-    // Create a span for the likes
-    const imgLikes = document.createElement('span');
-    imgLikes.textContent = `${media.likes} \u2665`;
-
-    // Append title and likes to the div
-    divTitleLikes.appendChild(titleImg);
-    divTitleLikes.appendChild(imgLikes);
-
-    // Append the div to the article
-    article.appendChild(divTitleLikes);
-
-    // Append the article to the portfolio
-    portfolio.appendChild(article);
-});
+                    titleLikes.appendChild(titleImg);
+                    titleLikes.appendChild(imgLikes);
+                    article.appendChild(titleLikes);
+                    portfolio.appendChild(article);
+                });
             }
+
+            // Initial display of portfolio
+            displayPortfolio(mediaData);
+
+            // Add event listener to the dropdown menu
+            const dropdown = document.getElementById('photographer-select');
+            dropdown.addEventListener('change', () => {
+                const sortBy = dropdown.value;
+
+                // Sort the mediaData based on the selected option
+                if (sortBy === '1') {
+                    mediaData.sort((a, b) => b.likes - a.likes);
+
+                } else if (sortBy === '2') {
+                    mediaData.sort((a, b) => new Date(b.date) - new Date(a.date));
+                } else if (sortBy === '3') {
+                    mediaData.sort((a, b) => a.title.localeCompare(b.title));
+                }
+
+
+                // Display the sorted portfolio
+                displayPortfolio(mediaData);
+            });
         }
     }
+}
 
 displayPhotographer();
-
-
-
-
-

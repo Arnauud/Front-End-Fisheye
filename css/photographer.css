@@ -69,6 +69,17 @@ form input {
     border-radius: 5px;
 }
 
+.error{
+    border: 2px solid red
+}
+
+.error-message {
+    display: none;
+    color: red;
+    font-size: 17px;
+  }
+  
+
 .photograph-header {
     display: flex;
     align-items: center;
@@ -197,7 +208,7 @@ button {
     border-radius: 10px;
 }
 
-.portfolio .divTitleLikes {
+.portfolio .titleLikes {
     display: flex;
     justify-content: space-between;
     width: 85%;  /* Ensure the div spans the full width of its container */

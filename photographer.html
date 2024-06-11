@@ -32,20 +32,21 @@
 			<div class="modal">
 				<header>
           <h2 id="photographerName">Contactez-Moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="">
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Close Contact form" alt="">
         </header>
 				<form>
 					<div>
 						<label for="firstname">Prénom</label>
-						<input type="text" name="firstname" id="firstname">
+						<input type="text" name="firstname" id="firstname" aria-label="First name">
+            <div class = "error-message" id = "first-error"></div>
             <label for="lastName">Nom</label>
-						<input type="email" name="lastName" id="lastName">
+						<input type="text" name="lastName" id="lastName" aria-label="Last name">
             <label for="Email">E-mail</label>
-						<input type="Email" name="Email" id="email">
+						<input type="Email" name="Email" id="email" aria-label="Email">
             <label for="message">Votre message</label>
-            <textarea name="message" id="message" style="width: 534px; height: 210px"></textarea>
+            <textarea name="message" id="message" aria-label="Your message" style="width: 534px; height: 210px"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
 		</div>
