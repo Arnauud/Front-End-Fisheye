@@ -34,19 +34,30 @@
           <h2 id="photographerName">Contactez-Moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Close Contact form" alt="">
         </header>
+        <div id="lightbox" class="lightbox">
+          <div class="lightbox-content">
+            <span class="close">&times;</span>
+            <img class="lightbox-image" src="" alt="">
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+          </div>
+        </div>
 				<form>
 					<div>
 						<label for="firstname">Prénom</label>
 						<input type="text" name="firstname" id="firstname" aria-label="First name">
-            <div class = "error-message" id = "first-error"></div>
+            <div class ="error-message" id ="first-error"></div>
             <label for="lastName">Nom</label>
 						<input type="text" name="lastName" id="lastName" aria-label="Last name">
+            <div class ="error-message" id ="last-error"></div>
             <label for="Email">E-mail</label>
 						<input type="Email" name="Email" id="email" aria-label="Email">
+            <div class ="error-message" id ="email-error"></div>
             <label for="message">Votre message</label>
-            <textarea name="message" id="message" aria-label="Your message" style="width: 534px; height: 210px"></textarea>
+            <textarea name="message" id="message" aria-label="Your message" style="width: 100%; height: 210px"></textarea>
+            <div class ="error-message" id ="message-error"></div>
 					</div>
-          <button class="contact_button" aria-label="Send">Envoyer</button>
+          <button class="form_contact_button" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
 		</div>

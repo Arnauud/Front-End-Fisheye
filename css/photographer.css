@@ -25,6 +25,9 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    position: fixed;
+    top: 15%;
+    right: 20%;
 }
 
 .modal header {
@@ -211,10 +214,80 @@ button {
 .portfolio .titleLikes {
     display: flex;
     justify-content: space-between;
-    width: 85%;  /* Ensure the div spans the full width of its container */
+    width: 85%;  
+    max-width: 350px;
 }
 
 video {
     height: 300px;
     width: 350px;
 }
+
+
+/* --------------------------------------------------- LightBox --------------------------------------------------- */
+
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: white;
+  }
+  
+  .lightbox-content {
+    position: relative;
+    margin: auto;
+    top: 10%;
+    width: 80%;
+    max-width: 700px;
+  }
+  
+  .lightbox-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .close {
+    position: absolute;
+    top: -65px;
+    right: -110px;
+    color: #901C1C;
+    font-size: 140px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 42%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #901C1C;
+    font-weight: bold;
+    font-size: 140px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+    .prev {
+        right: 100%;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }

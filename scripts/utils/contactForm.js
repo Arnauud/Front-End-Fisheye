@@ -77,7 +77,7 @@ function firstNameValidation() {
       errorMessageElement.style.display = "none";
       firstNameInput.classList.remove("error");
   } else {
-      console.error(errorMessage.firstName);
+      console.log(errorMessage.firstName);
       firstNameCheck = false;
       errorMessageElement.style.display = "block";
       firstNameInput.classList.add("error");
@@ -97,7 +97,7 @@ function lastNameValidation() {
       errorMessageElement.style.display = "none";
       lastNameInput.classList.remove("error");
   } else {
-      console.error(errorMessage.lastName);
+      console.log(errorMessage.lastName);
       lastNameCheck = false;
       errorMessageElement.style.display = "block";
       lastNameInput.classList.add("error");
@@ -118,7 +118,7 @@ function emailValidation() {
       errorMessageElement.style.display = "none";
       emailInput.classList.remove("error");
   } else {
-      console.error(errorMessage.email);
+      console.log(errorMessage.email);
       validationEmailCheck = false;
       errorMessageElement.style.display = "block";
       emailInput.classList.add("error");
@@ -131,22 +131,23 @@ function yourMessage() {
   let yourMessage = document.getElementById("message");
   let errorMessageElement = document.getElementById("message-error");
 
-  if (yourMessage !== '' || yourMessage.length < 2) {
+  if (yourMessage !== '' && yourMessage.length > 2) {
       errorMessageElement.style.display = "none";
       yourMessage.classList.remove("error");
       yourCheckMessage = true
+      console.log("Message validated")
   } else {
-      console.error("Invalid message");
+      console.error(errorMessage.yourMessage);
       errorMessageElement.style.display = "block";
       yourMessage.classList.add("error");
-      errorMessageElement.textContent = "Veuillez entrer un message valide";
+      errorMessageElement.textContent = errorMessage.yourMessage;
       yourCheckMessage = false
   }
 }
 
 //Le formulaire doit être valide quand l'utilisateur clique sur "Submit"
 function formValidation() {
-  let formValidationBtn = document.querySelector(".contact_button");
+  let formValidationBtn = document.querySelector(".form_contact_button");
 
   if (formValidationBtn) {
       formValidationBtn.addEventListener("click", (event) => {
@@ -159,8 +160,8 @@ function formValidation() {
           yourMessage();
 
           if (firstNameCheck && lastNameCheck && validationEmailCheck && yourCheckMessage === true) {
-            console.log("Good to close")
             closeModal();
+            console.log("Submit Sent")
           } else {
               console.log("Form is not valid");
           }
