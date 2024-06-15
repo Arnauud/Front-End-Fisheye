@@ -276,7 +276,7 @@ function openLightbox(index) {
         lightboxImage.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.image}`;
         lightboxImage.alt = media.title;
         lightboxTitle.textContent = media.title;
-        lightboxTitle.setAttribute('aria-label', media.title);
+        lightboxImage.setAttribute('aria-label', media.title);
     } else if (media.video) {
         if (lightboxImage.tagName !== 'VIDEO') {
             // Create a new video element
@@ -290,7 +290,7 @@ function openLightbox(index) {
         lightboxImage.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
         lightboxImage.alt = media.title;
         lightboxTitle.textContent = media.title;
-        lightboxTitle.setAttribute('aria-label', media.title);
+        lightboxImage.setAttribute('aria-label', media.title);
     }
 
     lightbox.style.display = 'block';
