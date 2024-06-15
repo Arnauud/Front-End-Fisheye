@@ -28,56 +28,7 @@ async function fetchMediaData(photographerId) {
 }
 
 
-// Creating a lightbox functinon display
-function createLightbox(media) {
-    const lightbox = document.createElement('div');
-    lightbox.id = 'lightbox';
-    lightbox.className = 'lightbox';
-    lightbox.style.display = 'none'; // to be hidden initially but then displayed on click
-    
 
-    const lightboxContent = document.createElement('div');
-    lightboxContent.className = 'lightbox-content';
-
-    const closeBtn = document.createElement('span');
-    closeBtn.className = 'close';
-    closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', closeLightbox);
-    closeBtn.setAttribute('aria-label', `Close dialog`); 
-
-    const lightboxImage = document.createElement('img');
-    lightboxImage.className = 'lightbox-image';
-    lightboxImage.alt = '';
-    lightboxImage.setAttribute('aria-label', 'image closeup view'); 
-
-    const prevBtn = document.createElement('a');
-    prevBtn.className = 'prev';
-    prevBtn.innerHTML = '&#10094;';
-    prevBtn.addEventListener('click', showPrevMedia);
-    prevBtn.setAttribute('aria-label', `Previous image`); 
-
-    const nextBtn = document.createElement('a');
-    nextBtn.className = 'next';
-    nextBtn.innerHTML = '&#10095;';
-    nextBtn.addEventListener('click', showNextMedia);
-    nextBtn.setAttribute('aria-label', `Next image`);
-
-    const lightboxTitle = document.createElement('h2');
-    lightboxTitle.className = 'lightbox-title';
-    lightboxTitle.innerHTML = '';
-    lightboxTitle.setAttribute('aria-label', `NEED THE TITLE !!!!!!!!`); 
-
-
-    lightboxContent.appendChild(closeBtn);
-    lightboxContent.appendChild(lightboxImage);
-    lightboxContent.appendChild(nextBtn);
-    lightboxContent.appendChild(prevBtn);
-    lightboxContent.appendChild(lightboxTitle)
-    lightbox.appendChild(lightboxContent);
-    
-    const mainElement = document.querySelector('main'); // Target the <main> element
-    mainElement.appendChild(lightbox); // Append lightbox to the <main> element
-}
 
 let currentIndex = 0;
 let mediaData = [];
@@ -158,6 +109,7 @@ async function displayPhotographer() {
                         if (isJPEG) {
                             const image = document.createElement('img');
                             image.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.image}`;
+                            image.setAttribute('arial-label', `${media.title}, close up view`)
                             image.dataset.index = index;
                             article.appendChild(image);
 
@@ -180,6 +132,7 @@ async function displayPhotographer() {
                             const source = document.createElement('source');
                             source.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
                             source.type = 'video/mp4';
+                            source.setAttribute('arial-label', `${media.title}, close up view`)
                             video.dataset.index = index;
                             video.appendChild(source);
                             videoContainer.appendChild(video);
@@ -201,6 +154,7 @@ async function displayPhotographer() {
                     const imgLikes = document.createElement('span');
                     imgLikes.textContent = `${media.likes} \u2665`;
                     imgLikes.style.cursor = 'pointer';
+                    imgLikes.setAttribute('arial-label', `likes`)
 
                     const likeClickHandler = function () {
                         if (!imgLikes.classList.contains('clicked')) {
@@ -241,25 +195,103 @@ async function displayPhotographer() {
     }
 }
 
+// Creating a lightbox functinon display
+async function createLightbox(media) {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const photographerId = urlParams.get('id');
+    mediaData = await fetchMediaData(photographerId);
+
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.className = 'lightbox';
+    lightbox.style.display = 'none'; // to be hidden initially but then displayed on click
+    
+
+    const lightboxContent = document.createElement('div');
+    lightboxContent.className = 'lightbox-content';
+    lightboxContent.setAttribute('aria-label', 'image closeup view'); 
+
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'close';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', closeLightbox);
+    closeBtn.setAttribute('aria-label', `Close dialog`); 
+
+
+    // Need to compose an if statement if the below is a video.. 
+
+    const lightboxImage = document.createElement('img');
+    lightboxImage.className = 'lightbox-image';
+    lightboxImage.alt = '';
+
+    // lightboxImage.setAttribute('aria-label', ); 
+
+    const prevBtn = document.createElement('a');
+    prevBtn.className = 'prev';
+    prevBtn.innerHTML = '&#10094;';
+    prevBtn.addEventListener('click', showPrevMedia);
+    prevBtn.setAttribute('aria-label', `Previous image`); 
+
+    const nextBtn = document.createElement('a');
+    nextBtn.className = 'next';
+    nextBtn.innerHTML = '&#10095;';
+    nextBtn.addEventListener('click', showNextMedia);
+    nextBtn.setAttribute('aria-label', `Next image`);
+
+    // Media title acts like an index, which doesn't switch back if we click on another image after..
+    const lightboxTitle = document.createElement('h2');
+    lightboxTitle.className = 'lightbox-title';
+    lightboxTitle.textContent = '';
+
+
+    lightboxContent.appendChild(closeBtn);
+    lightboxContent.appendChild(lightboxImage);
+    lightboxContent.appendChild(nextBtn);
+    lightboxContent.appendChild(prevBtn);
+    lightboxContent.appendChild(lightboxTitle)
+    lightbox.appendChild(lightboxContent);
+    
+    const mainElement = document.querySelector('main'); // Target the <main> element
+    mainElement.appendChild(lightbox); // Append lightbox to the <main> element
+}
+
 function openLightbox(index) {
     currentIndex = index;
     const lightbox = document.getElementById('lightbox');
+    const lightboxContent = lightbox.querySelector('.lightbox-content');
     let lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
     const media = mediaData[index];
 
     if (media.image) {
+        if (lightboxImage.tagName !== 'IMG') {
+            // Create a new img element
+            const newImage = document.createElement('img');
+            newImage.className = 'lightbox-image';
+            newImage.setAttribute('aria-label', 'image closeup view');
+            lightboxContent.replaceChild(newImage, lightboxImage);
+            lightboxImage = newImage; // Update the reference
+        }
         lightboxImage.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.image}`;
         lightboxImage.alt = media.title;
-        lightboxTitle.innerHTML = media.image
+        lightboxTitle.textContent = media.title;
+        lightboxTitle.setAttribute('aria-label', media.title);
     } else if (media.video) {
+        if (lightboxImage.tagName !== 'VIDEO') {
+            // Create a new video element
+            const newVideo = document.createElement('video');
+            newVideo.className = 'lightbox-image';
+            newVideo.setAttribute('aria-label', 'video closeup view');
+            newVideo.controls = true;
+            lightboxContent.replaceChild(newVideo, lightboxImage);
+            lightboxImage = newVideo; // Update the reference
+        }
         lightboxImage.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
         lightboxImage.alt = media.title;
-        lightboxImage = document.createElement('video');
-        lightboxImage.controls = true;
-        lightboxImage.src = `./assets/photographers/Sample_Photos/${media.photographerId}/${media.video}`;
-        lightboxTitle.innerHTML = media.video
+        lightboxTitle.textContent = media.title;
+        lightboxTitle.setAttribute('aria-label', media.title);
     }
-    createLightbox(media);
 
     lightbox.style.display = 'block';
 }
@@ -284,9 +316,9 @@ document.addEventListener('keydown', function (event) {
         showNextMedia();
     } else if (event.key === 'ArrowLeft') {
         showPrevMedia();
-    } else if (event.key === 'Escape') {
+    } else if (event.key === 'Escape' || event.key === ' ') {
         closeLightbox();
     }
 });
-
+createLightbox();
 displayPhotographer();

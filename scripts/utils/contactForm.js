@@ -131,17 +131,17 @@ function yourMessage() {
   let yourMessage = document.getElementById("message");
   let errorMessageElement = document.getElementById("message-error");
 
-  if (yourMessage !== '' && yourMessage.length > 2) {
+  if (yourMessage.value.length > 2) {
       errorMessageElement.style.display = "none";
       yourMessage.classList.remove("error");
-      yourCheckMessage = true
-      console.log("Message validated")
+      yourCheckMessage = true;
+      console.log("Message validated");
   } else {
-      console.error(errorMessage.yourMessage);
+      console.log(errorMessage.yourMessage);
       errorMessageElement.style.display = "block";
       yourMessage.classList.add("error");
       errorMessageElement.textContent = errorMessage.yourMessage;
-      yourCheckMessage = false
+      yourCheckMessage = false;
   }
 }
 

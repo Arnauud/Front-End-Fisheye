@@ -209,6 +209,7 @@ button {
     width: 350px;
     height: 300px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .portfolio .titleLikes {
@@ -238,6 +239,11 @@ video {
     overflow: auto;
     background-color: white;
   }
+
+ .lightbox h2{
+  color: #901C1C;
+  font-size: 24px;
+}
   
   .lightbox-content {
     position: relative;
