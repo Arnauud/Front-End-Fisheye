@@ -2,6 +2,10 @@
   "devDependencies": {
     "@eslint/js": "^9.5.0",
     "eslint": "^9.5.0",
-    "globals": "^15.4.0"
+    "globals": "^15.6.0"
+  },
+  "scripts": {
+    "dev": "http-server",
+    "lint": "eslint /Users/arnaudbourgin/Documents/Front-End-Fisheye/scripts/**/*.js"
   }
 }

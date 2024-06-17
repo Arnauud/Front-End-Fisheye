@@ -28,7 +28,9 @@ async function getPhotographerDataById(id) {
 }
 
 // Open Window for Contact
-async function displayModal() {
+
+/* eslint-disable no-unused-vars */
+async function displayModal() { 
   const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
 
@@ -73,12 +75,12 @@ function firstNameValidation() {
 
   if (firstName.length > 2 && firstName !== '') {
       console.log("Good first name");
-      firstNameCheck = true;
+      let firstNameCheck = true;
       errorMessageElement.style.display = "none";
       firstNameInput.classList.remove("error");
   } else {
       console.log(errorMessage.firstName);
-      firstNameCheck = false;
+      let firstNameCheck = false;
       errorMessageElement.style.display = "block";
       firstNameInput.classList.add("error");
       errorMessageElement.textContent = errorMessage.firstName;
@@ -93,12 +95,12 @@ function lastNameValidation() {
 
   if (lastName.length > 2 && lastName !== '') {
       console.log("Good last name");
-      lastNameCheck = true;
+      let lastNameCheck = true;
       errorMessageElement.style.display = "none";
       lastNameInput.classList.remove("error");
   } else {
       console.log(errorMessage.lastName);
-      lastNameCheck = false;
+      let lastNameCheck = false;
       errorMessageElement.style.display = "block";
       lastNameInput.classList.add("error");
       errorMessageElement.textContent = errorMessage.lastName;
@@ -114,12 +116,12 @@ function emailValidation() {
 
   if (emailRegExp.test(email)) {
       console.log("Good email name");
-      validationEmailCheck = true;
+      let validationEmailCheck = true;
       errorMessageElement.style.display = "none";
       emailInput.classList.remove("error");
   } else {
       console.log(errorMessage.email);
-      validationEmailCheck = false;
+      let validationEmailCheck = false;
       errorMessageElement.style.display = "block";
       emailInput.classList.add("error");
       errorMessageElement.textContent = errorMessage.email;
@@ -134,14 +136,14 @@ function yourMessage() {
   if (yourMessage.value.length > 2) {
       errorMessageElement.style.display = "none";
       yourMessage.classList.remove("error");
-      yourCheckMessage = true;
+      let yourCheckMessage = true;
       console.log("Message validated");
   } else {
       console.log(errorMessage.yourMessage);
       errorMessageElement.style.display = "block";
       yourMessage.classList.add("error");
       errorMessageElement.textContent = errorMessage.yourMessage;
-      yourCheckMessage = false;
+      let yourCheckMessage = false;
   }
 }
 
@@ -158,7 +160,7 @@ function formValidation() {
           lastNameValidation();
           emailValidation();
           yourMessage();
-
+        /* eslint-disable no-undef*/
           if (firstNameCheck && lastNameCheck && validationEmailCheck && yourCheckMessage === true) {
             closeModal();
             console.log("Submit Sent")

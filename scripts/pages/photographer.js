@@ -72,6 +72,7 @@ async function displayPhotographer() {
             button.textContent = 'Contactez-moi';
             button.setAttribute('aria-label', `Contact me ${photographer.name}`);
             button.onclick = function () {
+            /* eslint-disable no-undef */
                 displayModal();
             };
 
@@ -196,7 +197,7 @@ async function displayPhotographer() {
 }
 
 // Creating a lightbox functinon display
-async function createLightbox(media) {
+async function createLightbox() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const photographerId = urlParams.get('id');
@@ -219,13 +220,13 @@ async function createLightbox(media) {
     closeBtn.setAttribute('aria-label', `Close dialog`); 
 
 
-    // Need to compose an if statement if the below is a video.. 
+
 
     const lightboxImage = document.createElement('img');
     lightboxImage.className = 'lightbox-image';
     lightboxImage.alt = '';
 
-    // lightboxImage.setAttribute('aria-label', ); 
+
 
     const prevBtn = document.createElement('a');
     prevBtn.className = 'prev';
@@ -239,7 +240,6 @@ async function createLightbox(media) {
     nextBtn.addEventListener('click', showNextMedia);
     nextBtn.setAttribute('aria-label', `Next image`);
 
-    // Media title acts like an index, which doesn't switch back if we click on another image after..
     const lightboxTitle = document.createElement('h2');
     lightboxTitle.className = 'lightbox-title';
     lightboxTitle.textContent = '';

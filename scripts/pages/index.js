@@ -18,6 +18,7 @@
         // Return the photographers array
         return { photographers };
     
+        /* eslint-disable no-unused-vars */
     } catch(error){
     console.error('Check the Pull code')
 }
@@ -27,6 +28,7 @@
         const photographersSection = document.querySelector(".photographer_section");
 
         photographers.forEach((photographer) => {
+            /* eslint-disable no-undef */
             const photographerModel = photographerTemplate(photographer);
             const userCardDOM = photographerModel.getUserCardDOM();
             photographersSection.appendChild(userCardDOM);
