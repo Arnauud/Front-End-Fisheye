@@ -163,7 +163,7 @@ function formValidation() {
         /* eslint-disable no-undef*/
           if (firstNameCheck && lastNameCheck && validationEmailCheck && yourCheckMessage === true) {
             closeModal();
-            console.log("Submit Sent")
+            console.log("Submit Sent");
           } else {
               console.log("Form is not valid");
           }

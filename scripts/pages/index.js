@@ -10,18 +10,16 @@
 
         const data = await response.json();
 
-
-
-        // Extract the photographers from the JSON data
+        // Extract the photographers from the JSON data in the variable
         const photographers = data.photographers;
 
-        // Return the photographers array
+        // Return the photographers information
         return { photographers };
     
         /* eslint-disable no-unused-vars */
     } catch(error){
     console.error('Check the Pull code')
-}
+    }
 }
 
     async function displayData(photographers) {

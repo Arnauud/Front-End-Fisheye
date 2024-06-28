@@ -126,7 +126,7 @@ async function displayPhotographer() {
                         if (isMP4) {
                             const videoContainer = document.createElement('div');
                             const video = document.createElement('video');
-                            video.controls = true;
+                            video.controls = false;
                             video.loop = true;
                             video.muted = true;
 
@@ -156,7 +156,7 @@ async function displayPhotographer() {
                     imgLikes.textContent = `${media.likes} \u2665`;
                     imgLikes.style.cursor = 'pointer';
                     imgLikes.setAttribute('arial-label', `likes`)
-
+/// LIKES HANDLER //////
                     const likeClickHandler = function () {
                         if (!imgLikes.classList.contains('clicked')) {
                             media.likes += 1;
@@ -178,23 +178,90 @@ async function displayPhotographer() {
 
             displayPortfolio(mediaData);
 
-            const dropdown = document.getElementById('photographer-select');
-            dropdown.addEventListener('change', () => {
-                const sortBy = dropdown.value;
+            
+/// FILTER HANDLER //////
+document.addEventListener('DOMContentLoaded', function () {
+    const customDropdown = document.querySelector('.custom-dropdown');
+    const selected = customDropdown.querySelector('.custom-dropdown-selected');
+    const optionsList = customDropdown.querySelector('.custom-dropdown-list');
+    const options = optionsList.querySelectorAll('.custom-dropdown-option');
 
-                if (sortBy === '1') {
-                    mediaData.sort((a, b) => b.likes - a.likes);
-                } else if (sortBy === '2') {
-                    mediaData.sort((a, b) => new Date(b.date) - new Date(a.date));
-                } else if (sortBy === '3') {
-                    mediaData.sort((a, b) => a.title.localeCompare(b.title));
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+        const isExpanded = customDropdown.getAttribute('aria-expanded') === 'true';
+        customDropdown.setAttribute('aria-expanded', !isExpanded);
+    }
+
+    // Select an option
+    function selectOption(option) {
+        const value = option.getAttribute('data-value');
+        selected.textContent = option.textContent;
+        customDropdown.setAttribute('aria-expanded', 'false');
+        sortMedia(value); // Call the sorting function with the selected value
+    }
+
+    // Sort media based on the selected option
+    function sortMedia(value) {
+        if (value === '1') {
+            mediaData.sort((a, b) => b.likes - a.likes);
+        } else if (value === '2') {
+            mediaData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } else if (value === '3') {
+            mediaData.sort((a, b) => a.title.localeCompare(b.title));
+        }
+        displayPortfolio(mediaData);
+    }
+
+    // Keyboard navigation
+    function handleKeydown(event) {
+        const isExpanded = customDropdown.getAttribute('aria-expanded') === 'true';
+        switch (event.key) {
+            case 'ArrowDown':
+                event.preventDefault();
+                if (!isExpanded) {
+                    toggleDropdown();
+                } else {
+                    const next = document.activeElement.nextElementSibling || options[0];
+                    next.focus();
                 }
-
-                displayPortfolio(mediaData);
-            });
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                if (isExpanded) {
+                    const prev = document.activeElement.previousElementSibling || options[options.length - 1];
+                    prev.focus();
+                }
+                break;
+            case 'Enter':
+            case ' ':
+                if (isExpanded) {
+                    selectOption(document.activeElement);
+                } else {
+                    toggleDropdown();
+                }
+                break;
+            case 'Escape':
+                if (isExpanded) {
+                    toggleDropdown();
+                }
+                break;
         }
     }
-}
+
+    // Event listeners
+    customDropdown.addEventListener('click', toggleDropdown);
+    customDropdown.addEventListener('keydown', handleKeydown);
+
+    options.forEach(option => {
+        option.addEventListener('click', () => selectOption(option));
+        option.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                selectOption(option);
+            }
+        });
+    });
+});
 
 // Creating a lightbox functinon display
 async function createLightbox() {

@@ -18,12 +18,15 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
       <div class="dropdownMenu">
-        <label for="photographer-select">Trier par</label>
-        <select id="photographer-select">
-            <option value="1">Popularité</option>
-            <option value="2">Date</option>
-            <option value="3">Titre</option>
-        </select>
+        <label for="photographer-select" class="custom-dropdown-label">Trier par</label>
+        <div class="custom-dropdown" tabindex="0">
+            <div class="custom-dropdown-selected" aria-labelledby="photographer-select">Popularité</div>
+            <ul class="custom-dropdown-list" id="photographer-select" role="listbox">
+                <li role="option" tabindex="0" data-value="1" class="custom-dropdown-option">Popularité</li>
+                <li role="option" tabindex="0" data-value="2" class="custom-dropdown-option">Date</li>
+                <li role="option" tabindex="0" data-value="3" class="custom-dropdown-option">Titre</li>
+            </ul>
+        </div>
     </div>
     <section class="portfolio"></section>
       <div class="likesPrice"></div>

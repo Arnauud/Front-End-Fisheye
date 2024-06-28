@@ -15,6 +15,11 @@
     cursor: pointer;
 }
 
+.contact_button:hover{
+    color: black;
+    background-color: #DB8876;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
@@ -26,7 +31,7 @@
     padding: 35px;
     margin: auto;
     position: fixed;
-    top: 15%;
+    top: 0%;
     right: 20%;
 }
 
@@ -132,7 +137,7 @@ form input {
     height: 200px;
     width: 200px;
     border-radius: 50%;
-    object-fit: fill;
+    object-fit: cover;
 
 }
 
@@ -164,31 +169,59 @@ button {
 
 
 /* Style the dropdown container */
-.dropdownMenu {
-    margin: 20px 100px 100px;
-    font-family: Arial, sans-serif;
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 170px;
+    height: 69px;
+    background-color: #901C1C;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: DM Sans, sans-serif;
+    font-weight: bold;
 }
 
-/* Style the label */
-.dropdownMenu label {
-    margin-right: 10px;
-    font-size: 16px;
+.custom-dropdown-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 10px;
 }
 
-/* Style the select element */
-.dropdownMenu select {
+.custom-dropdown-list {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: #901C1C;
+    border-radius: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+}
+
+.custom-dropdown-option {
     padding: 10px;
-    font-size: 16px;
-    background-color: #901C1C; /* Background color for the dropdown */
-    color: white; /* Text color for the dropdown */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    background-repeat: no-repeat;
-    background-position-x: calc(100% - 10px);
-    background-position-y: 50%;
-    padding-right: 10px; /* Space for custom arrow */
+    text-align: center;
+    cursor: pointer;
 }
+
+.custom-dropdown-option:hover,
+.custom-dropdown-option:focus {
+    background-color: #DB8876;
+}
+
+.custom-dropdown[aria-expanded="true"] .custom-dropdown-list {
+    display: block;
+}
+
+.custom-dropdown-label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
 
 .portfolio{
     display: grid;
@@ -210,6 +243,7 @@ button {
     height: 300px;
     border-radius: 10px;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .portfolio .titleLikes {
@@ -260,11 +294,10 @@ video {
   
   .close {
     position: absolute;
-    top: -65px;
-    right: -110px;
+    top: -26px;
+    right: -49px;
     color: #901C1C;
-    font-size: 140px;
-    font-weight: bold;
+    font-size: 70px;
     transition: 0.3s;
   }
   
@@ -283,8 +316,7 @@ video {
     padding: 16px;
     margin-top: -22px;
     color: #901C1C;
-    font-weight: bold;
-    font-size: 140px;
+    font-size: 60px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
