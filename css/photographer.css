@@ -169,6 +169,12 @@ button {
 
 
 /* Style the dropdown container */
+
+.dropdownMenu{
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
 .custom-dropdown {
     position: relative;
     display: inline-block;
@@ -185,9 +191,18 @@ button {
 .custom-dropdown-selected {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 100%;
     padding: 0 10px;
+}
+
+.custom-dropdown-selected i {
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+}
+
+.custom-dropdown[aria-expanded="true"] .fa-chevron-down {
+    transform: rotate(180deg);
 }
 
 .custom-dropdown-list {
@@ -202,26 +217,31 @@ button {
     z-index: 10;
 }
 
+.custom-dropdown-list.show {
+    display: block;
+}
+
 .custom-dropdown-option {
     padding: 10px;
-    text-align: center;
     cursor: pointer;
+    position: relative; /* Ensure the pseudo-element is positioned relative to the option */
 }
 
-.custom-dropdown-option:hover,
-.custom-dropdown-option:focus {
-    background-color: #DB8876;
-}
-
-.custom-dropdown[aria-expanded="true"] .custom-dropdown-list {
+.custom-dropdown-option:nth-child(-n+3):before {
+    content: '';
     display: block;
+    width: 90%; /* Adjust this value to set the desired length of the border */
+    height: 1px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 5%; /* Adjust this value to center the border */
 }
 
 .custom-dropdown-label {
     font-size: 16px;
     margin-right: 10px;
 }
-
 
 .portfolio{
     display: grid;

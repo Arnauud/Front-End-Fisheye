@@ -75,12 +75,12 @@ function firstNameValidation() {
 
   if (firstName.length > 2 && firstName !== '') {
       console.log("Good first name");
-      let firstNameCheck = true;
+      firstNameCheck = true;
       errorMessageElement.style.display = "none";
       firstNameInput.classList.remove("error");
   } else {
       console.log(errorMessage.firstName);
-      let firstNameCheck = false;
+      firstNameCheck = false;
       errorMessageElement.style.display = "block";
       firstNameInput.classList.add("error");
       errorMessageElement.textContent = errorMessage.firstName;
@@ -95,12 +95,12 @@ function lastNameValidation() {
 
   if (lastName.length > 2 && lastName !== '') {
       console.log("Good last name");
-      let lastNameCheck = true;
+      lastNameCheck = true;
       errorMessageElement.style.display = "none";
       lastNameInput.classList.remove("error");
   } else {
       console.log(errorMessage.lastName);
-      let lastNameCheck = false;
+      lastNameCheck = false;
       errorMessageElement.style.display = "block";
       lastNameInput.classList.add("error");
       errorMessageElement.textContent = errorMessage.lastName;
@@ -116,12 +116,12 @@ function emailValidation() {
 
   if (emailRegExp.test(email)) {
       console.log("Good email name");
-      let validationEmailCheck = true;
+      validationEmailCheck = true;
       errorMessageElement.style.display = "none";
       emailInput.classList.remove("error");
   } else {
       console.log(errorMessage.email);
-      let validationEmailCheck = false;
+      validationEmailCheck = false;
       errorMessageElement.style.display = "block";
       emailInput.classList.add("error");
       errorMessageElement.textContent = errorMessage.email;
@@ -136,14 +136,14 @@ function yourMessage() {
   if (yourMessage.value.length > 2) {
       errorMessageElement.style.display = "none";
       yourMessage.classList.remove("error");
-      let yourCheckMessage = true;
+      yourCheckMessage = true;
       console.log("Message validated");
   } else {
       console.log(errorMessage.yourMessage);
       errorMessageElement.style.display = "block";
       yourMessage.classList.add("error");
       errorMessageElement.textContent = errorMessage.yourMessage;
-      let yourCheckMessage = false;
+      yourCheckMessage = false;
   }
 }
 
@@ -161,7 +161,7 @@ function formValidation() {
           emailValidation();
           yourMessage();
         /* eslint-disable no-undef*/
-          if (firstNameCheck && lastNameCheck && validationEmailCheck && yourCheckMessage === true) {
+          if (firstNameCheck === true && lastNameCheck === true && validationEmailCheck  === true && yourCheckMessage === true) {
             closeModal();
             console.log("Submit Sent");
           } else {
