@@ -171,8 +171,7 @@ button {
 /* Style the dropdown container */
 
 .dropdownMenu{
-    margin-left: 100px;
-    margin-top: 20px;
+    margin: 20px 0px 20px 100px;
 }
 
 .custom-dropdown {
@@ -348,4 +347,12 @@ video {
   
   .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.8);
+  }
+
+  .lightbox-title{
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+    color: #901C1C;
+
   }

@@ -33,6 +33,7 @@ async function getPhotographerDataById(id) {
 async function displayModal() { 
   const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
+  document.addEventListener('keydown', handleEscapeKey);
 
   try {
       const photographerId = getPhotographerIdFromUrl();
@@ -51,11 +52,18 @@ async function displayModal() {
       modal.style.display = "none"; // Hide the modal if there was an error
   }
 }
+function handleEscapeKey(event) {
+  if (event.key === 'Escape') {
+      closeModal();
+  }
+}
+
 
 // Close Window for Contact
 function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
+  document.removeEventListener('keydown', handleEscapeKey);
 }
 
 // Form Modal management
@@ -75,11 +83,13 @@ function firstNameValidation() {
 
   if (firstName.length > 2 && firstName !== '') {
       console.log("Good first name");
+      /* eslint-disable no-undef*/
       firstNameCheck = true;
       errorMessageElement.style.display = "none";
       firstNameInput.classList.remove("error");
   } else {
       console.log(errorMessage.firstName);
+      /* eslint-disable no-undef*/
       firstNameCheck = false;
       errorMessageElement.style.display = "block";
       firstNameInput.classList.add("error");
@@ -95,11 +105,13 @@ function lastNameValidation() {
 
   if (lastName.length > 2 && lastName !== '') {
       console.log("Good last name");
+      /* eslint-disable no-undef*/
       lastNameCheck = true;
       errorMessageElement.style.display = "none";
       lastNameInput.classList.remove("error");
   } else {
       console.log(errorMessage.lastName);
+      /* eslint-disable no-undef*/
       lastNameCheck = false;
       errorMessageElement.style.display = "block";
       lastNameInput.classList.add("error");
@@ -116,11 +128,13 @@ function emailValidation() {
 
   if (emailRegExp.test(email)) {
       console.log("Good email name");
+      /* eslint-disable no-undef*/
       validationEmailCheck = true;
       errorMessageElement.style.display = "none";
       emailInput.classList.remove("error");
   } else {
       console.log(errorMessage.email);
+      /* eslint-disable no-undef*/
       validationEmailCheck = false;
       errorMessageElement.style.display = "block";
       emailInput.classList.add("error");
@@ -136,6 +150,7 @@ function yourMessage() {
   if (yourMessage.value.length > 2) {
       errorMessageElement.style.display = "none";
       yourMessage.classList.remove("error");
+      /* eslint-disable no-undef*/
       yourCheckMessage = true;
       console.log("Message validated");
   } else {
@@ -143,6 +158,7 @@ function yourMessage() {
       errorMessageElement.style.display = "block";
       yourMessage.classList.add("error");
       errorMessageElement.textContent = errorMessage.yourMessage;
+      /* eslint-disable no-undef*/
       yourCheckMessage = false;
   }
 }
