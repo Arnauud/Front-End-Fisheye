@@ -1,4 +1,6 @@
-        function mediaFactory(mediaData) {
+  
+
+ function mediaFactory(mediaData) {
             const portfolio = document.querySelector('.portfolio');
             portfolio.innerHTML = '';
 
@@ -80,6 +82,9 @@
                 imgLikes.setAttribute('aria-label', `like`);
 
                 const likeClickHandler = function () {
+                    let mediaLikes = mediaData.reduce((sum, item) => sum + item.likes, 0);
+                    const spanLikes = document.createElement('span');
+                    spanLikes.textContent = `Likes: ${mediaLikes} \u2665`;    
                     if (!imgLikes.classList.contains('clicked')) {
                         media.likes += 1;
                         imgLikes.textContent = `${media.likes} \u2665`;

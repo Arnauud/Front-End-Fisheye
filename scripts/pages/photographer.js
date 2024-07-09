@@ -30,6 +30,7 @@ async function fetchMediaData(photographerId) {
 let currentIndex = 0;
 let mediaData = [];
 
+
 async function displayPhotographer() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
@@ -52,7 +53,7 @@ async function displayPhotographer() {
             return;
         }
 
-        let mediaLikes = mediaData.reduce((sum, item) => sum + item.likes, 0);
+        // let mediaLikes = mediaData.reduce((sum, item) => sum + item.likes, 0);
 
         const header = document.querySelector('.photograph-header');
         header.innerHTML = '';
@@ -99,17 +100,17 @@ async function displayPhotographer() {
         likesPriceBox.innerHTML = '';
 
         const spanLikes = document.createElement('span');
-        spanLikes.textContent = `Likes: ${mediaLikes} \u2665`;
+        spanLikes.textContent = `Likes: ${mediaLikes} \u2665`;      
 
         const spanPrice = document.createElement('span');
         spanPrice.textContent = `${photographer.price}€ / jour`;
 
         likesPriceBox.appendChild(spanLikes);
-        likesPriceBox.appendChild(spanPrice);
+        likesPriceBox.appendChild(spanPrice);   
 
 ////////////////////////////
         /* eslint-disable no-undef*/
-        mediaFactory(mediaData);
+        mediaFactory(mediaData)
 
 ////////////////////////////
 
@@ -124,7 +125,7 @@ async function displayPhotographer() {
         // Function to refresh dropdown options based on selected item
         function refreshDropdownOptions() {
             const selectedText = dropdownSelected.textContent.trim();
-            
+
             // Hide all options first
             dropdownOptions.forEach(option => {
                 option.style.display = 'none';
@@ -194,30 +195,30 @@ async function displayPhotographer() {
             mediaFactory(mediaData);
         });
 
-                        option.addEventListener('keydown', (e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault();
-                                option.click();
-                            } else if (e.key === 'ArrowDown') {
-                                e.preventDefault();
-                                if (index < dropdownOptions.length - 1) {
-                                    dropdownOptions[index + 1].focus();
-                                }
-                            } else if (e.key === 'ArrowUp') {
-                                e.preventDefault();
-                                if (index > 0) {
-                                    dropdownOptions[index - 1].focus();
-                                } else {
-                                    dropdown.focus();
-                                }
-                            } else if (e.key === 'Escape') {
-                                e.preventDefault();
-                                dropdown.setAttribute('aria-expanded', 'false');
-                                dropdownList.classList.remove('show');
-                                dropdownIcon.className = 'fa fa-chevron-down';
-                                dropdown.focus();
-                            }
-                        });
+        option.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();         
+                option.click();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (index < dropdownOptions.length - 1) {
+                    dropdownOptions[index + 1].focus();
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (index > 0) {
+                    dropdownOptions[index - 1].focus();
+                } else {
+                    dropdown.focus();
+                }
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                dropdown.setAttribute('aria-expanded', 'false');
+                dropdownList.classList.remove('show');
+                dropdownIcon.className = 'fa fa-chevron-down';
+                dropdown.focus();
+            }
+        });
     });
 
     document.addEventListener('click', (e) => {
@@ -226,10 +227,7 @@ async function displayPhotographer() {
             dropdown.setAttribute('aria-expanded', 'false');
             dropdownIcon.className = 'fa fa-chevron-down';
         }
-    });
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+    });        
 
         createLightbox(); // Initialize lightbox after setting up everything
     } catch (error) {
