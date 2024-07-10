@@ -53,8 +53,6 @@ async function displayPhotographer() {
             return;
         }
 
-        // let mediaLikes = mediaData.reduce((sum, item) => sum + item.likes, 0);
-
         const header = document.querySelector('.photograph-header');
         header.innerHTML = '';
 
@@ -82,7 +80,6 @@ async function displayPhotographer() {
         button.textContent = 'Contactez-moi';
         button.setAttribute('aria-label', `Contact me ${photographer.name}`);
         button.onclick = function () {
-            /* eslint-disable no-undef*/
             displayModal();
         };
 
@@ -99,14 +96,17 @@ async function displayPhotographer() {
         const likesPriceBox = document.querySelector('.likesPrice');
         likesPriceBox.innerHTML = '';
 
+        const mediaLikes = mediaData.reduce((sum, item) => sum + item.likes, 0);
         const spanLikes = document.createElement('span');
-        spanLikes.textContent = `Likes: ${mediaLikes} \u2665`;      
+        spanLikes.className = 'totalLikes';
+        spanLikes.textContent = `Likes: ${mediaLikes} \u2665`;
 
         const spanPrice = document.createElement('span');
         spanPrice.textContent = `${photographer.price}€ / jour`;
 
         likesPriceBox.appendChild(spanLikes);
-        likesPriceBox.appendChild(spanPrice);   
+        likesPriceBox.appendChild(spanPrice);
+        
 
 ////////////////////////////
         /* eslint-disable no-undef*/
